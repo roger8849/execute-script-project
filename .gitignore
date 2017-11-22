@@ -20,3 +20,9 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+execute-script-client/.classpath
+execute-script-client/.project
+execute-script-client/.settings/
+execute-script-server/.classpath
+execute-script-server/.project
+execute-script-server/.settings/

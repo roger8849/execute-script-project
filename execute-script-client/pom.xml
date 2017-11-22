@@ -3,8 +3,8 @@
   http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.javeriana.vlcmulticast</groupId>
-	<artifactId>vlc-multicast-client</artifactId>
+	<groupId>com.javeriana.executescript</groupId>
+	<artifactId>execute-script-client</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 
