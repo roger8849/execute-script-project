@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.javeriana.executescript.server.dto.MulticastMessage;
+import com.javeriana.executescript.server.dto.Message;
 import com.javeriana.executescript.server.enumeration.MessageType;
 import com.javeriana.executescript.server.service.MulticastService;
 import com.javeriana.executescript.server.util.MulticastProperties;
@@ -32,7 +32,7 @@ public class DefaultMulticastService implements MulticastService {
    * com.javeriana.vlcmulticast.server.service.impl.MulticastService#askAndReceiveVlcConfiguration()
    */
   @Override
-  public MulticastMessage askAndReceiveVlcConfiguration() throws Exception {
+  public Message askAndReceiveVlcConfiguration() throws Exception {
     InetAddress multicastAddress = InetAddress.getByName(multicastProperties.getInetAddress());
     Integer port = multicastProperties.getInetPort();
     Integer timeout = multicastProperties.getTimeout();
@@ -40,10 +40,10 @@ public class DefaultMulticastService implements MulticastService {
     return receiveVlcConfigurationResponse(multicastAddress, port, timeout);
   }
 
-  private MulticastMessage receiveVlcConfigurationResponse(InetAddress multicastAddress,
+  private Message receiveVlcConfigurationResponse(InetAddress multicastAddress,
       Integer port, Integer timeout) throws Exception {
     MulticastSocket clientSocket = new MulticastSocket(port);
-    MulticastMessage configurationReceived = null;
+    Message configurationReceived = null;
     clientSocket.setSoTimeout(timeout);
     try {
       clientSocket.joinGroup(multicastAddress);
@@ -86,7 +86,7 @@ public class DefaultMulticastService implements MulticastService {
   }
 
   private void askForConfiguration(InetAddress multicastAddress, Integer port) throws Exception {
-    MulticastMessage message = new MulticastMessage(UUID.randomUUID(), MessageType.ASKING, "");
+    Message message = new Message(UUID.randomUUID(), MessageType.ASKING, "");
     LOG.debug("Init message send succesfuly sent: {}", message);
     DatagramSocket serverSocket = new DatagramSocket();
     try {
