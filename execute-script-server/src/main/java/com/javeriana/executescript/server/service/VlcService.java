@@ -2,10 +2,10 @@ package com.javeriana.executescript.server.service;
 
 import java.io.IOException;
 
-import com.javeriana.executescript.server.dto.MulticastMessage;
+import com.javeriana.executescript.server.dto.Message;
 
 public interface VlcService {
 
-  void runVlcCommand(MulticastMessage multicastMessage) throws IOException;
+  void runVlcCommand(Message multicastMessage) throws IOException;
 
 }

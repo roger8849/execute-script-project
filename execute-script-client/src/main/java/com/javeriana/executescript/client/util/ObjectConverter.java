@@ -1,6 +1,8 @@
 package com.javeriana.executescript.client.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -8,7 +10,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.javeriana.executescript.client.dto.MulticastMessage;
+import com.javeriana.executescript.client.dto.Address;
+import com.javeriana.executescript.client.dto.Message;
 
 public class ObjectConverter {
 
@@ -25,7 +28,7 @@ public class ObjectConverter {
   // return SerializationUtils.serialize(message);
   // }
 
-  public static byte[] fromMessageToByteData(MulticastMessage message) throws IOException {
+  public static byte[] fromMessageToByteData(Message message) throws IOException {
     String jsonObject = fromObjectToJsonString(message);
     byte[] data = jsonObject.getBytes();
     return data;
@@ -40,7 +43,7 @@ public class ObjectConverter {
   // // LOG.debug("Multicast object transformed: {}", multicastObject);
   // return SerializationUtils.deserialize(data);
   // }
-  public static MulticastMessage fromByteDataToMessage(byte[] data)
+  public static Message fromByteDataToMessage(byte[] data)
       throws IOException, ClassNotFoundException {
     String jsonString = new String(data);
     jsonString = jsonString.trim();
@@ -53,10 +56,18 @@ public class ObjectConverter {
     return mapper.writeValueAsString(object);
   }
 
-  public static MulticastMessage fromJsonStringToMulticastMessage(String jsonObject)
-      throws IOException {
+  public static Message fromJsonStringToMulticastMessage(String jsonObject) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    return mapper.readValue(jsonObject, MulticastMessage.class);
+    return mapper.readValue(jsonObject, Message.class);
+  }
+
+  public static List<Address> fromPropertiesAddressToAddressList(List<String> urls) {
+    List<Address> addresses = new ArrayList<>();
+    for (String url : urls) {
+      String[] urlPair = url.split(":");
+      addresses.add(new Address(urlPair[0], Integer.parseInt(urlPair[1])));
+    }
+    return addresses;
   }
 
   private ObjectConverter() {}

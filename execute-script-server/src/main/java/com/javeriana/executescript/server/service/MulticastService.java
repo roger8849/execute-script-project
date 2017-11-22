@@ -1,9 +1,9 @@
 package com.javeriana.executescript.server.service;
 
-import com.javeriana.executescript.server.dto.MulticastMessage;
+import com.javeriana.executescript.server.dto.Message;
 
 public interface MulticastService {
 
-  MulticastMessage askAndReceiveVlcConfiguration() throws Exception;
+  Message askAndReceiveVlcConfiguration() throws Exception;
 
 }

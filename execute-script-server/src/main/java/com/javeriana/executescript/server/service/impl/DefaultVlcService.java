@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.javeriana.executescript.server.dto.MulticastMessage;
+import com.javeriana.executescript.server.dto.Message;
 import com.javeriana.executescript.server.service.VlcService;
 
 @Service
@@ -21,7 +21,7 @@ public class DefaultVlcService implements VlcService {
    * vlcmulticast.server.dto.MulticastMessage)
    */
   @Override
-  public void runVlcCommand(MulticastMessage multicastMessage) throws IOException {
+  public void runVlcCommand(Message multicastMessage) throws IOException {
     LOG.debug("Executing command{}", multicastMessage.getVlcCommand());
     Runtime.getRuntime().exec(multicastMessage.getVlcCommand());
   }

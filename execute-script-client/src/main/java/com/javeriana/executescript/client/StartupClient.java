@@ -9,19 +9,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.javeriana.executescript.client.service.MulticastClientService;
-import com.javeriana.executescript.client.util.MulticastProperties;
+import com.javeriana.executescript.client.util.ObjectConverter;
+import com.javeriana.executescript.client.util.ServerProperties;
 
 @SpringBootApplication
 public class StartupClient implements CommandLineRunner {
 
   public static final Logger LOG = LoggerFactory.getLogger(StartupClient.class);
-
   @Autowired
-  MulticastProperties multicastProperties;
-
-  @Autowired
-  MulticastClientService multicastClientService;
+  private ServerProperties serverProperties;
 
   public static void main(String[] args) throws Exception {
 
@@ -32,7 +28,8 @@ public class StartupClient implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    this.multicastClientService.listenForRequests();
+    System.out.println(ObjectConverter
+        .fromPropertiesAddressToAddressList(serverProperties.getInetAddress()).toString());
     exit(0);
   }
 }

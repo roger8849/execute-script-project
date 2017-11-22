@@ -1,29 +1,32 @@
-package com.javeriana.executescript.client.dto;
+package com.javeriana.executescript.server.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.javeriana.executescript.client.enumeration.MessageType;
-import com.javeriana.executescript.client.util.ObjectConverter;
+import com.javeriana.executescript.server.enumeration.MessageType;
+import com.javeriana.executescript.server.util.ObjectConverter;
 
-public class MulticastMessage implements Serializable {
+public class Message implements Serializable {
   /** */
   private static final long serialVersionUID = 2348465134494597549L;
 
+  /** */
   private UUID messageId;
   private MessageType messageType;
-  private String vlcCommand;
+  private Long freeMemory;
+  private byte[] scriptToExecute;
 
-  public MulticastMessage() {
+  public Message() {
     super();
   }
 
-  public MulticastMessage(UUID messageId, MessageType messageType, String vlcCommand) {
+  public Message(UUID messageId, MessageType messageType, Long freeMemory, byte[] scriptToExecute) {
     super();
     this.messageId = messageId;
     this.messageType = messageType;
-    this.vlcCommand = vlcCommand;
+    this.freeMemory = freeMemory;
+    this.scriptToExecute = scriptToExecute;
   }
 
   public UUID getMessageId() {
@@ -45,12 +48,20 @@ public class MulticastMessage implements Serializable {
     this.messageType = messageType;
   }
 
-  public String getVlcCommand() {
-    return vlcCommand;
+  public Long getFreeMemory() {
+    return freeMemory;
   }
 
-  public void setVlcCommand(String vlcCommand) {
-    this.vlcCommand = vlcCommand;
+  public void setFreeMemory(Long freeMemory) {
+    this.freeMemory = freeMemory;
+  }
+
+  public byte[] getScriptToExecute() {
+    return scriptToExecute;
+  }
+
+  public void setScriptToExecute(byte[] scriptToExecute) {
+    this.scriptToExecute = scriptToExecute;
   }
 
   @Override
