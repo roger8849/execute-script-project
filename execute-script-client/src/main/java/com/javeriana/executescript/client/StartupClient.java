@@ -9,15 +9,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.javeriana.executescript.client.util.ObjectConverter;
-import com.javeriana.executescript.client.util.ServerProperties;
+import com.javeriana.executescript.client.service.impl.DefaultClientService;
 
 @SpringBootApplication
 public class StartupClient implements CommandLineRunner {
 
   public static final Logger LOG = LoggerFactory.getLogger(StartupClient.class);
+
   @Autowired
-  private ServerProperties serverProperties;
+  private DefaultClientService clientService;
 
   public static void main(String[] args) throws Exception {
 
@@ -28,8 +28,7 @@ public class StartupClient implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    System.out.println(ObjectConverter
-        .fromPropertiesAddressToAddressList(serverProperties.getInetAddress()).toString());
+    this.clientService.getMemoryServersInformation();
     exit(0);
   }
 }

@@ -9,9 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.javeriana.executescript.server.dto.Message;
-import com.javeriana.executescript.server.service.MulticastService;
-import com.javeriana.executescript.server.service.VlcService;
+import com.javeriana.executescript.server.service.impl.DefaultServerService;
 
 @SpringBootApplication
 public class StartupServer implements CommandLineRunner {
@@ -19,10 +17,7 @@ public class StartupServer implements CommandLineRunner {
   public static final Logger LOG = LoggerFactory.getLogger(StartupServer.class);
 
   @Autowired
-  MulticastService multicastService;
-
-  @Autowired
-  VlcService vlcService;
+  private DefaultServerService defaultServerService;
 
   public static void main(String[] args) throws Exception {
 
@@ -33,9 +28,7 @@ public class StartupServer implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    Message multicastMessage = this.multicastService.askAndReceiveVlcConfiguration();
-    LOG.debug("multicast message received: {}", multicastMessage);
-    this.vlcService.runVlcCommand(multicastMessage);
+    this.defaultServerService.runServer();
     exit(0);
   }
 }

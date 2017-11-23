@@ -1,11 +1,11 @@
-package com.javeriana.executescript.client.dto;
+package com.javeriana.executescript.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.javeriana.executescript.client.enumeration.MessageType;
 import com.javeriana.executescript.client.util.ObjectConverter;
+import com.javeriana.executescript.enumeration.MessageType;
 
 public class Message implements Serializable {
   /** */

@@ -8,7 +8,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.javeriana.executescript.server.dto.Message;
+import com.javeriana.executescript.dto.Message;
 
 public class ObjectConverter {
 
