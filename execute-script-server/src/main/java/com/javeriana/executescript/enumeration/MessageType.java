@@ -1,5 +1,5 @@
 package com.javeriana.executescript.enumeration;
 
 public enum MessageType {
-  ASKING, RESPONSE, SCRIPT_TO_START
+  ASKING, RESPONSE, EXECUTE_SCRIPT, FINAL_RESPONSE
 }

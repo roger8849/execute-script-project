@@ -35,23 +35,32 @@ public class DefaultServerService {
         oos = new ObjectOutputStream(socket.getOutputStream());
         Message message = (Message) ois.readObject();
         LOG.debug("Message received: {}", message);
-        processInMessage(message);
+        Message outputMessage = processInMessage(message);
+        LOG.debug("Message to send: {}", outputMessage);
+        oos.writeObject(outputMessage);
       } catch (ClassNotFoundException e) {
         LOG.error("Message is not a well known object type. ", e);
+      } catch (Exception e) {
+        keepAlive = false;
+        LOG.error("Critical error in the application.", e);
       }
     } while (keepAlive);
+
   }
 
   private Message processInMessage(Message message) throws IOException {
-
     Message responseMessage = new Message();
-    responseMessage.setMessageType(MessageType.RESPONSE);
     if (MessageType.ASKING.equals(message.getMessageType())) {
+      responseMessage.setMessageType(MessageType.RESPONSE);
       responseMessage.setFreeMemory(Runtime.getRuntime().freeMemory());
+    } else if (MessageType.EXECUTE_SCRIPT.equals(message.getMessageType())) {
+      // TODO execute script
+      responseMessage.setMessageType(MessageType.FINAL_RESPONSE);
+
     } else {
       throw new IOException("MessageType not recognized.");
     }
-    return null;
+    return responseMessage;
   }
 
 }

@@ -28,7 +28,7 @@ public class StartupClient implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    this.clientService.getMemoryServersInformation();
+    this.clientService.executeClient();
     exit(0);
   }
 }
