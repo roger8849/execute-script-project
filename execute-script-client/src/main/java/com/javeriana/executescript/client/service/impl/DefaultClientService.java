@@ -25,14 +25,17 @@ public class DefaultClientService {
   @Autowired
   private ServerProperties serverProperties;
 
-  public void executeClient() throws UnknownHostException, IOException {
+  public void executeClient() throws IOException {
     List<Address> addresses =
         ObjectConverter.fromPropertiesAddressToAddressList(serverProperties.getInetAddress());
     Address lowestBusyServer = this.askForLowestBusyServer(addresses);
     if (null == lowestBusyServer) {
       throw new UnknownHostException("Server information is empty");
     }
+    Message scriptMessage =
+        ObjectConverter.getMessageScriptToSend(serverProperties.getResourceScriptPath());
 
+    LOG.debug("Message script to send {}", scriptMessage);
   }
 
   private Address askForLowestBusyServer(List<Address> addresses)
