@@ -25,3 +25,4 @@ execute-script-client/.settings/
 execute-script-server/.classpath
 execute-script-server/.project
 execute-script-server/.settings/
+execute-script-server/script.jar

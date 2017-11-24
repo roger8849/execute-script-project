@@ -95,8 +95,10 @@ public class DefaultServerService {
     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
     String s;
     while ((s = reader.readLine()) != null) {
+      LOG.debug("Executing command line {}", s);
       message.setResponse(s);
       oos.writeObject(message);
+
     }
   }
 
