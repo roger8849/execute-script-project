@@ -57,7 +57,7 @@ public class ObjectConverter {
   }
 
   public static Message getMessageScriptToSend(String filePath) throws IOException {
-    Message message = new Message(UUID.randomUUID(), MessageType.EXECUTE_SCRIPT, null, null);
+    Message message = new Message(UUID.randomUUID(), MessageType.EXECUTE_SCRIPT, null, null, null);
     File file = new File(filePath);
     FileInputStream fis = null;
     BufferedInputStream bis = null;

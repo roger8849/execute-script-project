@@ -35,7 +35,23 @@ public class DefaultClientService {
     Message scriptMessage =
         ObjectConverter.getMessageScriptToSend(serverProperties.getResourceScriptPath());
 
-    LOG.debug("Message script to send {}", scriptMessage);
+    Socket clientSocket = null;
+    ObjectOutputStream oos = null;
+    ObjectInputStream ois = null;
+
+    try {
+      clientSocket = new Socket(lowestBusyServer.getInetAddress(), lowestBusyServer.getPort());
+      oos = new ObjectOutputStream(clientSocket.getOutputStream());
+      ois = new ObjectInputStream(clientSocket.getInputStream());
+      LOG.debug("Message script to send {}", scriptMessage);
+      oos.writeObject(scriptMessage);
+      LOG.debug("Receiving script execution. {}", ois.readObject());
+
+    } catch (Exception e) {
+    } finally {
+
+    }
+
   }
 
   private Address askForLowestBusyServer(List<Address> addresses)
