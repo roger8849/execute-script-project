@@ -89,7 +89,7 @@ public class DefaultServerService {
     Message message = new Message();
     message.setMessageType(MessageType.SCRIPT_RESPONSE);
 
-    String command = "java -jar script.jar 99999999";
+    String command = "java -jar script.jar 9999999999";
     Process p = Runtime.getRuntime().exec(command);
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));

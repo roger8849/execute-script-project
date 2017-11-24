@@ -48,11 +48,9 @@ public class DefaultClientService {
       LOG.debug("Receiving script messaging");
       Message scriptMessageReceived = (Message) ois.readObject();
       while (scriptMessageReceived != null
-          && !scriptMessageReceived.getResponse().contains("Timer")) {
+          && !scriptMessageReceived.getResponse().contains("---------------")) {
         LOG.debug("Server execution response: {}", scriptMessageReceived.getResponse());
         scriptMessageReceived = (Message) ois.readObject();
-        // ois.close();
-        // ois = new ObjectInputStream(clientSocket.getInputStream());
       }
 
     } catch (Exception e) {
@@ -65,7 +63,7 @@ public class DefaultClientService {
   private Address askForLowestBusyServer(List<Address> addresses)
       throws UnknownHostException, IOException {
     Address lowestBusyServer = null;
-    long memoryUsage = Long.MAX_VALUE;
+    long memoryUsage = Long.MIN_VALUE;
     Message outputMessage = new Message();
     outputMessage.setMessageType(MessageType.ASKING);
     Socket clientSocket = null;
@@ -82,7 +80,7 @@ public class DefaultClientService {
         LOG.debug("Getting response from server.");
         inputMessage = (Message) ois.readObject();
         LOG.debug("Message got it {}", inputMessage);
-        if (inputMessage != null && inputMessage.getFreeMemory() < memoryUsage) {
+        if (inputMessage != null && inputMessage.getFreeMemory() > memoryUsage) {
           lowestBusyServer = address;
         }
       } catch (ClassNotFoundException e) {
