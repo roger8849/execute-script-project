@@ -45,7 +45,15 @@ public class DefaultClientService {
       ois = new ObjectInputStream(clientSocket.getInputStream());
       LOG.debug("Message script to send {}", scriptMessage);
       oos.writeObject(scriptMessage);
-      LOG.debug("Receiving script execution. {}", ois.readObject());
+      LOG.debug("Receiving script messaging");
+      Message scriptMessageReceived = (Message) ois.readObject();
+      while (scriptMessageReceived != null
+          && !scriptMessageReceived.getResponse().contains("Timer")) {
+        LOG.debug("Server execution response: {}", scriptMessageReceived.getResponse());
+        scriptMessageReceived = (Message) ois.readObject();
+        // ois.close();
+        // ois = new ObjectInputStream(clientSocket.getInputStream());
+      }
 
     } catch (Exception e) {
     } finally {
