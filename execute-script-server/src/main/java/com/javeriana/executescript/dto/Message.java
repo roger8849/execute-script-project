@@ -1,10 +1,10 @@
-package com.javeriana.executescript.server.dto;
+package com.javeriana.executescript.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.javeriana.executescript.server.enumeration.MessageType;
+import com.javeriana.executescript.enumeration.MessageType;
 import com.javeriana.executescript.server.util.ObjectConverter;
 
 public class Message implements Serializable {
@@ -16,17 +16,20 @@ public class Message implements Serializable {
   private MessageType messageType;
   private Long freeMemory;
   private byte[] scriptToExecute;
+  private String response;
 
   public Message() {
     super();
   }
 
-  public Message(UUID messageId, MessageType messageType, Long freeMemory, byte[] scriptToExecute) {
+  public Message(UUID messageId, MessageType messageType, Long freeMemory, byte[] scriptToExecute,
+      String response) {
     super();
     this.messageId = messageId;
     this.messageType = messageType;
     this.freeMemory = freeMemory;
     this.scriptToExecute = scriptToExecute;
+    this.response = response;
   }
 
   public UUID getMessageId() {
@@ -62,6 +65,14 @@ public class Message implements Serializable {
 
   public void setScriptToExecute(byte[] scriptToExecute) {
     this.scriptToExecute = scriptToExecute;
+  }
+
+  public String getResponse() {
+    return response;
+  }
+
+  public void setResponse(String response) {
+    this.response = response;
   }
 
   @Override

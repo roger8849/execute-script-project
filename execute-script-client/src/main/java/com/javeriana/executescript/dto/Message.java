@@ -1,31 +1,35 @@
-package com.javeriana.executescript.client.dto;
+package com.javeriana.executescript.dto;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.javeriana.executescript.client.enumeration.MessageType;
 import com.javeriana.executescript.client.util.ObjectConverter;
+import com.javeriana.executescript.enumeration.MessageType;
 
 public class Message implements Serializable {
   /** */
   private static final long serialVersionUID = 2348465134494597549L;
 
+  /** */
   private UUID messageId;
   private MessageType messageType;
   private Long freeMemory;
   private byte[] scriptToExecute;
+  private String response;
 
   public Message() {
     super();
   }
 
-  public Message(UUID messageId, MessageType messageType, Long freeMemory, byte[] scriptToExecute) {
+  public Message(UUID messageId, MessageType messageType, Long freeMemory, byte[] scriptToExecute,
+      String response) {
     super();
     this.messageId = messageId;
     this.messageType = messageType;
     this.freeMemory = freeMemory;
     this.scriptToExecute = scriptToExecute;
+    this.response = response;
   }
 
   public UUID getMessageId() {
@@ -61,6 +65,14 @@ public class Message implements Serializable {
 
   public void setScriptToExecute(byte[] scriptToExecute) {
     this.scriptToExecute = scriptToExecute;
+  }
+
+  public String getResponse() {
+    return response;
+  }
+
+  public void setResponse(String response) {
+    this.response = response;
   }
 
   @Override
